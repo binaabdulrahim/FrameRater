@@ -4,14 +4,14 @@ import json
 import sys
 
 def fetch_secrets():
-    print("🔐 FrameRatr Secrets Manager")
+    print("FrameRatr Secrets Manager")
     print("=" * 50)
     
     try:
         client = boto3.client('secretsmanager', region_name='us-east-2')
-        print("✓ Connected to AWS Secrets Manager")
+        print("Connected to AWS Secrets Manager")
     except Exception as e:
-        print(f"✗ Failed: {e}")
+        print(f"Failed: {e}")
         sys.exit(1)
     
     try:
@@ -27,23 +27,23 @@ def fetch_secrets():
         
         # Write .env file
         with open('.env', 'w') as f:
-            f.write("# Auto-generated from AWS Secrets Manager\n\n")
+            f.write("Auto-generated from AWS Secrets Manager\n\n")
             for key, value in config.items():
                 f.write(f"{key}={value}\n")
             f.write("FIREBASE_SERVICE_ACCOUNT=firebase-service-account.json\n")
         
-        print("✓ Created .env file")
+        print("Created .env file")
         
         # Write Firebase service account JSON
         with open('firebase-service-account.json', 'w') as f:
             json.dump(firebase_config, f, indent=2)
         
-        print("✓ Created firebase-service-account.json")
-        print("\n✅ Success! All secrets configured!")
-        print("🚀 You can now run: docker compose up --build")
+        print("Created firebase-service-account.json")
+        print("\n Success! All secrets configured!")
+        print(" You can now run: docker compose up --build")
         
     except Exception as e:
-        print(f"✗ Error: {e}")
+        print(f"Error: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":
