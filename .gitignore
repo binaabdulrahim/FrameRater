@@ -1,4 +1,6 @@
+# ==================================
 # Python
+# ==================================
 __pycache__/
 *.py[cod]
 *$py.class
@@ -7,31 +9,50 @@ __pycache__/
 .venv/
 venv/
 ENV/
+env/
+*.egg-info/
 
-# Environment variables
+# ==================================
+# Environment & Secrets
+# ==================================
 .env
 *.env
+config.json
 
 # Firebase credentials
 *firebase*.json
 *service-account*.json
 
+# ==================================
 # Terraform
+# ==================================
 **/.terraform/
 *.tfstate
 *.tfstate.*
 *.tfvars
 .terraform.lock.hcl
+terraform/
 
-# IDE
+# ==================================
+# IDE & Editors
+# ==================================
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-*
 
-# OS
+# ==================================
+# Operating System
+# ==================================
 .DS_Store
 Thumbs.db
+*.bak
 
-# Git artifacts
-*.git/
+# ==================================
+# Logs & Databases
+# ==================================
+*.log
+*.sql.backup
+*.db
+*.sqlite

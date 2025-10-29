@@ -4,7 +4,7 @@
 CREATE EXTENSION IF NOT EXISTS citext;
 
 -- ==========================
--- Users (Firebase-auth’d)
+-- Users (Firebase-auth'd)
 -- ==========================
 CREATE TABLE app_user (
   uid TEXT PRIMARY KEY,                -- Firebase UID
@@ -23,7 +23,17 @@ CREATE TABLE movie (
   title VARCHAR(200) NOT NULL,
   release_date DATE,
   director_name VARCHAR(200),
-  tmdb_id INT UNIQUE
+  tmdb_id INT UNIQUE,
+  -- NEW FIELDS for caching TMDb data
+  poster_path TEXT,                    -- e.g., "/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+  backdrop_path TEXT,                  -- e.g., "/hkBaDkMWbLaf8B1lsWsKX7Ew3Xq.jpg"
+  overview TEXT,                       -- Movie description/plot
+  vote_average NUMERIC(3,1),           -- TMDb rating (0.0-10.0)
+  vote_count INT,                      -- Number of votes on TMDb
+  popularity NUMERIC(10,3),            -- TMDb popularity score
+  runtime INT,                         -- Duration in minutes
+  original_language VARCHAR(10),       -- e.g., "en", "es", "ja"
+  original_title VARCHAR(200)          -- Original title (if different)
 );
 
 CREATE TABLE tv_show (
@@ -31,7 +41,18 @@ CREATE TABLE tv_show (
   title VARCHAR(200) NOT NULL,
   release_date DATE,
   director_name VARCHAR(200),
-  tmdb_id INT UNIQUE
+  tmdb_id INT UNIQUE,
+  -- NEW FIELDS for caching TMDb data
+  poster_path TEXT,
+  backdrop_path TEXT,
+  overview TEXT,
+  vote_average NUMERIC(3,1),
+  vote_count INT,
+  popularity NUMERIC(10,3),
+  number_of_seasons INT,
+  number_of_episodes INT,
+  original_language VARCHAR(10),
+  original_title VARCHAR(200)
 );
 
 -- ==========================
@@ -188,6 +209,12 @@ CREATE INDEX idx_movie_rating_uid ON movie_rating (uid);
 CREATE INDEX idx_tv_rating_uid ON tv_rating (uid);
 CREATE INDEX idx_fav_movie_uid ON favorite_movie (uid);
 CREATE INDEX idx_fav_tv_uid ON favorite_tv (uid);
+
+-- NEW: Indexes for better performance on TMDb fields
+CREATE INDEX idx_movie_vote_average ON movie (vote_average DESC);
+CREATE INDEX idx_movie_popularity ON movie (popularity DESC);
+CREATE INDEX idx_tv_vote_average ON tv_show (vote_average DESC);
+CREATE INDEX idx_tv_popularity ON tv_show (popularity DESC);
 
 -- ==========================
 -- Optional: better title search (enable if needed)

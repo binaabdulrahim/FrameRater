@@ -13,8 +13,8 @@
   <body>
     <h1>Firebase Auth → ID Token → Call /api/me</h1>
     <p>Enter your Email/Password (the test user you created in Firebase Console):</p>
-    <input id="email" placeholder="demo@test.com" />
-    <input id="password" type="password" placeholder="Password123!" />
+    <input id="email" placeholder="test@frameratr.com" />
+    <input id="password" type="password" placeholder="TestPass123!" />
     <button id="signin">Sign In & Show ID Token</button>
 
     <h3>ID Token</h3>
@@ -28,12 +28,15 @@
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
       import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
-      // TODO: replace with your Firebase config
+      // Your Firebase config - UPDATED
       const firebaseConfig = {
-        apiKey: "AIzaSyBzEle0uO6vISBDtkZJHTqQzo7XZ_eJzOY",
-        authDomain: "frameratr-ef66a.firebaseapp.com",
-        projectId: "frameratr-ef66a",
-        appId: "1:75330860255:web:ea9bb308d01be1d3a2e56a"
+        apiKey: "AIzaSyBpAAxGNIBAu06J5j797iYxC24-Rzx_6yg",
+        authDomain: "frameratr-2d006.firebaseapp.com",
+        projectId: "frameratr-2d006",
+        storageBucket: "frameratr-2d006.firebasestorage.app",
+        messagingSenderId: "30541079135",
+        appId: "1:30541079135:web:65f2b309ef1c6e51fc31ea",
+        measurementId: "G-H07JD5ZLCN"
       };
 
       const app = initializeApp(firebaseConfig);
@@ -56,7 +59,7 @@
           tokenEl.textContent = idToken;
           btnMe.disabled = false;
         } catch (e) {
-          tokenEl.textContent = "Error: " + e;
+          tokenEl.textContent = "Error: " + e.message;
         }
       };
 
@@ -69,7 +72,7 @@
           const json = await res.json();
           meEl.textContent = JSON.stringify(json, null, 2);
         } catch (e) {
-          meEl.textContent = "Error: " + e;
+          meEl.textContent = "Error: " + e.message;
         }
       };
     </script>
