@@ -18,7 +18,6 @@ cd FrameRatr
 ```
 
 ### 2. Get AWS Credentials
-Contact @binaabdul for:
 - AWS Access Key ID
 - AWS Secret Access Key
 
