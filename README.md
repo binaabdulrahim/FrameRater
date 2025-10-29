@@ -1,18 +1,43 @@
-# FrameRatr (Backend)
+# FrameRatr
 
-## What this is
-Backend for movie/TV discovery, ratings, favorites. TMDB + Postgres + Firebase Auth.
+> Movie discovery platform with ratings, reviews, and personalized recommendations
 
-## Quick start
+## Features
+
+- Search 1M+ movies & TV shows (TMDb API)
+- Rate and review content
+- Save favorites
+- Secure authentication (Firebase)
+- Production-ready AWS deployment
+- Enterprise security (AWS Secrets Manager)
+
+## Quick Start
 ```bash
-# 1) Clone
-git clone <your-repo-url>
+# 1. Clone
+git clone https://github.com/your-username/FrameRatr.git
 cd FrameRatr
 
-# 2) Create .env from example
-cp .env.example .env
-# Fill values (DB_*, TMDB_TOKEN, FIREBASE_*), but keep this file private.
+# 2. Set up secrets (AWS)
+cd backend
+python setup_secrets.py
 
-# 3) Start services (example)
+# 3. Start services
 docker compose up --build
-# or: python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+```
+
+## Architecture
+
+- **Backend**: Flask + PostgreSQL + TMDb API
+- **Auth**: Firebase Authentication
+- **Deployment**: AWS ECS + RDS + ALB
+- **Secrets**: AWS Secrets Manager
+
+## Documentation
+
+- [Setup Guide](Docs/README.md)
+- [Tech Spec](Docs/techspec.md)
+- [API Documentation](backend/README.md)
+
+## Team
+
+Built by FrameRatr 
